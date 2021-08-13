@@ -90,16 +90,37 @@ function get_page(page_name) {  // page_name options: "/bio", "/plans", "/portfo
 
 //  SQL-related 
 var mysql = require('mysql');
+var con; //  This will store our connection object.
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "ben",
-    password: "D3e4f5g6!"
-  });
-  
-  con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
+function connect_to_db() {
 
-  console.log(process.env);
+    var mysql_pass = fs.readFileSync("./mysql_pass.txt");
+
+    con = mysql.createConnection({
+        host: "localhost",
+        user: "ben",
+        password: mysql_pass,
+        database: "wikidb"
+    });
+      
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected!");
+        add_page_to_db({
+            title: 'My Page',
+            content: 'This is page content!'
+        })
+    });
+    
+}
+connect_to_db();
+
+//  Adding a page 
+function add_page_to_db(page_config) {
+    var sql = "INSERT INTO wiki_pages (page_title, page_content) ";
+    sql += "VALUES ('" + page_config.title + "', '" + page_config.content + "')";
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
+}
