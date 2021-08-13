@@ -86,3 +86,20 @@ function get_page(page_name) {  // page_name options: "/bio", "/plans", "/portfo
     console.log(render);
     return render;
 }
+
+
+//  SQL-related 
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "ben",
+    password: "D3e4f5g6!"
+  });
+  
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
+
+  console.log(process.env);
