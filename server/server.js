@@ -73,7 +73,12 @@ console.log('Server running at http://127.0.0.1:8080/');
 //  Rendering web pages inside of index.html
 function get_page(page_name) {  // page_name options: "/bio", "/plans", "/portfolio", "/wiki"
     var outer_content = fs.readFileSync('./index.html', 'utf-8');
-    var page_content = fs.readFileSync(page_name, 'utf-8');
+    var page_content = "";
+    try {
+        page_content = fs.readFileSync(page_name, 'utf-8');
+    } catch(err) {
+        page_content = fs.readFileSync("./pages/404.html");
+    }
 
     var page_parts = outer_content.split("<!-- INSERT CONTENT HERE -->");
 
