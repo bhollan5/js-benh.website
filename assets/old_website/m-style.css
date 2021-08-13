@@ -1,0 +1,92 @@
+body {
+        
+    
+}
+
+.ground1 {
+/*    margin-top:-100px;*/
+/*    top: 100px;*/
+    z-index: -99999;
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: skewY(-10deg) skewX(30deg) rotateX(-40deg) translateZ(-100px) translateY(80px) translateX(-5px);
+/*    margin-top: 50px;*/
+    
+}
+.ground2 {
+/*    margin-top:-100px;*/
+/*    top: 100px;*/
+    z-index: -100;
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: skewY(-10deg) skewX(30deg) rotateX(-40deg) translateZ(-100px) translateY(80px) translateX(-5px);
+/*    margin-top: 50px;*/
+    
+}
+.ground3 {
+/*    margin-top:-100px;*/
+/*    top: 100px;*/
+    opacity: 1;
+    z-index: -100;
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: skewY(-10deg) skewX(30deg) rotateX(-40deg) translateZ(-100px) translateY(80px) translateX(-5px);
+/*    margin-top: 50px;*/
+    
+}
+.ground4 {
+/*    margin-top:-100px;*/
+/*    top: 100px;*/
+    opacity: 1;
+    z-index: -100;
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: skewY(-10deg) skewX(30deg) rotateX(-40deg) translateZ(-100px) translateY(80px) translateX(-5px);
+/*    margin-top: 50px;*/
+    
+}
+.ground5 {
+/*    margin-top:-100px;*/
+/*    top: 100px;*/
+    opacity: 1;
+    z-index: -100;
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: skewY(-10deg) skewX(30deg) rotateX(-40deg) translateZ(-100px) translateY(80px) translateX(-5px);
+/*    margin-top: 50px;*/
+    
+}
+#suit {
+    height: 600px;
+    margin-left: 50%;
+    bottom: 0px;
+    position: absolute;
+    
+}
+
+#abtcontent {
+}
+
+#about {
+   
+}
+
+#sphere2 {
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: translateZ(-300px) translateY(0px) translateX(-5px);
+    
+}
+#sphere4 {
+    -webkit-transform:translateZ(-100px);
+      -moz-transform:translateZ(1px);
+      -o-transform:translateZ(-1px);
+      transform: translateZ(-300px) translateY(0px) translateX(-5px);
+    
+}

@@ -1,0 +1,237 @@
+<html>
+    <head>
+    
+    <title>Insanity!</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-style: italic;
+}
+
+.tiny {
+  font-size: 10px;
+}
+
+#board {
+  margin: 0 auto;
+  width: 90%;
+  height: 80px;
+  background: url("https://cssauthor.com/wp-content/uploads/2015/01/Plywood-Textures.jpg");
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.peg {
+  
+  
+  border-radius: 50%;
+  border: solid 3px black;
+}
+
+.peg:hover {
+  border: solid 3px gold;
+  cursor: pointer;
+}
+
+.selected {
+  border: solid 3px yellow;
+}
+
+.red {
+  background: linear-gradient(to bottom right, red, #bb3333);
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.blue {
+  background: blue;
+  background: linear-gradient(to bottom right, blue, #3333bb);
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.empty {
+  width: 10px;
+  height: 10px;
+  background: #555555;
+}
+
+.opt {
+  margin: 20px;
+}
+
+
+.pegContainer {
+  width: 10%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+        </style>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <script>
+var pegs = [];
+var selected = -1;
+
+var games = 0;
+var wins = 0;
+var won = false;
+
+
+function init() {
+  won = false;
+  games++;
+  $("#games").html("Games: " + games);
+  $("#board").html("");
+  pegs = [];
+  if (games == 4) {
+    $("#hint").html("(Yes, it is possible.)	");
+  }
+  if (games == 8) {
+    $("#hint").html("(Hint: Two pegs of the same color should never be directly adjacent until the very end.)	");
+  }
+  if (games == 12) {
+    $("#hint").html("(Hint: Get all the pegs to alternate colors.)	");
+  }
+  for (var i = 0; i < 10; i++) {
+    $("#board").append("<div class='pegContainer'><div id='peg" + i + "' class='peg' onclick='selectPeg(" + i + ")'></div></div>")
+    
+    var peg = {
+      el: $("#peg" + i),
+      type: 'empty'
+    }
+    pegTo(peg, 'empty');
+    
+    pegs.push(peg);
+  }
+  
+  for (var i = 0; i < 4; i++) {
+    pegTo(pegs[i], 'red')
+  }
+  
+  for (var i = 9; i > 5; i--) {
+    pegTo(pegs[i], 'blue')
+  }
+  
+}
+
+function pegTo(peg, type) {
+  peg.el.removeClass('red');
+  peg.el.removeClass('empty');
+  peg.el.removeClass('blue');
+  
+  peg.el.addClass(type);
+  peg.type = type;
+}
+
+function selectPeg(i) {
+  if (selected == -1) {
+    if (pegs[i].type == 'empty') {
+      return;
+    }
+    selected = i;
+    pegs[i].el.addClass('selected');
+  }
+  else if (selected != i) {
+    movePeg(selected, i);
+    deselect();
+  }
+}
+
+function deselect() {
+  if (selected != -1){
+    pegs[selected].el.removeClass('selected');
+    selected = -1;
+  }
+}
+
+function movePeg(start, end) {
+  if (pegs[end].type != 'empty') {
+    return;
+  }
+  if (pegs[start].type == 'red') {
+    if (end == (start + 1) || end == (start + 2) && pegs[end].type == 'empty') {
+      swapPegs(start, end);
+    }
+  }
+  if (pegs[start].type == 'blue') {
+    if (end == (start - 1) || end == (start - 2) && pegs[end].type == 'empty') {
+      swapPegs(start, end);
+    }
+  }
+  winCheck();
+}
+
+function swapPegs(peg1, peg2) {
+  var tmp = pegs[peg1].type;
+  pegTo(pegs[peg1], pegs[peg2].type);
+  pegTo(pegs[peg2], tmp);
+}
+
+function winCheck() {
+  if (won) {
+    return;
+  }
+  var win = true;
+  for (var i = 0; i < 4; i++) {
+    if (pegs[i].type != 'blue') {
+      win = false;
+    }
+  }
+  
+  for (var i = 9; i > 5; i--) {
+    if (pegs[i].type != 'red') {
+      win = false;
+    }
+  }
+  if (win) {
+    if (games <= 4) {
+      alert("You win! Wow, you're a genius!!!");
+    }
+    else {
+      alert("You win! Great job!");
+    }
+    wins++;
+    $("#wins").html("Wins: " + wins);
+  }
+}
+
+        </script>
+        
+    
+    </head>
+<body onload="init();">
+<h1>INSANITY</h1>
+<p class="tiny">Based on a peg game I bought at a yard sale by the same name.</p>
+<p class="tiny">Instructions, per the original game:</p>
+
+<p>Place 4 red pegs in the left 4 most holes, and 4 blue pegs in the 4 right most holes, leaving the center hold vacant. </p>
+<p>Object is to switch the colors from one end to the other.</p>
+<p>Possible moves are moving one space or jumping over a peg, always forward, never backward.</p>
+<p>You are a genius if you succeed in 4 attempts or less.</p>
+<p class="tiny" id="hint"></p>
+
+<div id="board">
+  
+</div>
+
+<div id="stats">
+  <div id="wins" class="opt">Wins: 0</div>
+  <div id="games" class="opt">Games: 0</div>
+  <button onclick="init()" id="reset" class="opt">Reset Game</button>
+</div>
+    <br><br><br><br>
+    <div><a href="http://benh.io/" target="_blank">Click here to go back to Ben's main site! :)</a></div>
+  </body>
+</html>

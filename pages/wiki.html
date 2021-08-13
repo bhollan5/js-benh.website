@@ -1,0 +1,120 @@
+<div class="text-center wiki-page">
+
+    <br /><br /><br /><br />
+
+    <h2 style="font-size:2em;">My Personal Wiki.</h2>
+    <hr />
+    <p style="font-size: 0.8em;">From benh.website/wiki, my personal research wiki. </p>
+    <br /><br />
+
+    <p>Hello! This is a page in my personal wiki, written & maintained by me.</p>
+    <br />
+    <p>
+        I'm a fan of Wikipedia, and my personal wiki works similarly.  It's a hyper-text based system, with each page dedicated to a single topic. And, just like Wikipedia, it serves as an encyclopedia.
+    </p>
+    <br />
+    <br />
+
+    <div class="table-of-contents">
+        <ul>
+            <li>1 <a href="#goals">Goals</a></li>
+            <li>2 <a href="#comparison_to_wikipedia">Comparison to Wikipedia</a></li>
+            <!--<ul>
+                <li>2.1 <a href="#similarities">Similarities</a></li>
+                <li>2.2 <a href="#differences">Differences</a></li>
+            </ul>
+            <li>3 <a href="#technical_details">Technical Details</a></li>
+            <ul>
+                <li>3.1 <a href="#how_i_use_this_wiki">How I use this wiki</a></li>
+                <li>3.2 <a href="#tech_stack">Tech stack</a></li>
+                <li>3.3 <a href="#page_components">Page Components</a></li>
+            </ul>-->
+                <!--<li>4 <a href="#contents">Contents</a></li>
+            <ul>
+                <li>4.1 <a href="#organizational_structures">Organizational structures</a></li>
+                <li>4.2 <a href="#subject_categories">Subject categories</a></li>
+                <li>4.3 <a href="#principles">Principles</a></li>
+            </ul>-->
+        </ul>
+    </div>
+    <br /><br />
+
+
+    <h3 id="goals">Goals</h3>
+    <hr />
+    <p>This wiki serves two main purposes. First, I'm using it as a compendium of my personal knowledge. It's organized to my own specifications, & contains information that I find relevant. I frequently find the wiki format more useful for organizing my thoughts than a blog. </p>
+    <br />
+    <p>Second, the wiki structure gives me a chance to work with an SQL database of text.  </p>
+
+    <br /><br />
+
+    <h3 id="comparison_to_wikipedia">Comparison to Wikipedia</h3>
+    <hr />
+    <p>This wiki is worth comparing to Wikipedia, the free, open-source wiki.  </p>
+
+    <br />
+
+    <h4 id="similarities">Similarities</h4>
+    <hr />
+    <p>This wiki is similar to wikipedia in structure, style, and scope of content.  I've borrowed the styling of Wikipedia pages, and Wikipedia's organizational structure as well. </p>
+    <br />
+
+    <h4 id="differences">Differences</h4>
+    <hr />
+    <p>Unlike Wikipedia, this wiki is only editable by me. </p>
+
+    <br /><br />
+
+    <h3 id="technical_details">Technical Details</h3>
+    <hr />
+
+    <h4 id="how_i_use_this_wiki">How I use this wiki</h4>
+    <hr />
+    <p>This website has 3 pages that allow me to view and edit the wiki: </p>
+    <ul>
+        <li>The <b>wiki page viewer</b> can be used to display any wiki page saved in the database.   </li>
+        <li>The <b>admin login page</b> is a password-protected interface that lets me log in as an administrator.   </li>
+        <li>The <b>wiki page editor</b> can be used to display an editable version of any wiki page in the database.  This page is only accessible after logging in from the admin page.</li>
+    </ul>
+    <br />
+    <div class="container-center flex space-between">
+        <div style="width:48%">
+            <p>Using these pages, I'm able to create, retrieve, and edit wiki pages from the SQL database. </p>
+        </div>
+        <div style="width: 48%; padding: 5px; background: #F8F9FA; border: solid 1px #A4A9B0; ">
+            <img src="~/assets/wiki/editor_image.png" style="width:100%"/>
+            A mockup of the wiki page editor. 
+        </div>
+        <br />
+    </div>
+
+    <h4 id="tech_stack">Tech stack</h4>
+    <hr />
+    <p>The wiki, like the rest of this website, is built using the .NET web framework.  I'm using Razor .cshtml files to make each page.  </p>
+    <br />
+    <p>Individual page data is saved and retrieved using an SQL database.</p>
+    <br />
+    <p>The database itself is still just a plan -- for now, this single page is hard coded, to show how the pages will look in the future. </p>
+    <br /><br />
+
+    <h4 id="page_components">Page components</h4>
+    <hr />
+    <p>The wiki's pages consist of various headers and paragraphs, plus a few extra page components.  For example, pages will start with standard table-of-contents components.    </p>
+    <br /><br />
+
+        <!--
+    <h3 id="contents">Contents</h3>
+    <hr />
+    <p>This wiki consists of pages, labelled by page name, and containing page content, in an SQL database.  However, in order to more easily navigate the wiki's pages, the content is also organized with various</p>
+
+    <br/>
+    <h4 id="organizational_structures">Organizational structures</h4>
+    <hr />
+    <p>The wiki's pages consist of various headers and paragraphs, plus a few extra page components.  For example, pages will start with standard table-of-contents components.    </p>
+    <br /><br />-->
+
+
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <!--<h3>Current page: @Model.Title</h3>-->
+</div>

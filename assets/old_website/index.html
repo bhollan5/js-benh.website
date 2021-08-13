@@ -1,0 +1,207 @@
+<html>
+
+<head>
+    <meta name="viewport" content="user-scalable = yes">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    
+    <link href="m-style.css" media="(max-width: 1060px)" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="script.js"></script>
+    </head>
+
+<body class="bg1" onload="setInterval(click, 10)">
+  <div id="container">
+      <div id="aboveGround">
+    <h1 id="BenH" class="threed1">Ben H</h1>
+    
+    <p id="about" class="threedDown1 menuitem" onclick="toAbout()">ABOUT</p>
+    <p id="projects" class="threedDown1 menuitem" onclick="toProjects()">PROJECTS</p>
+    <p id="resume" class="threedDown1 menuitem" onclick="toResume()">RESUME</p>
+    
+    <div id="qpos">
+      <div id="qbutton" class="threedDownButton1 menuitem qbutton1" onclick="newstyle()">?</div>
+    </div>
+<!--      TO BE IMPLEMENTED:
+          <div id="codepenDiv" class="menuitem">
+              <div id="codepenScale">
+          <div class="codepenLogo">
+                  </div>
+          </div>
+          </div>
+-->
+          
+<!--          ASSETS FOR DESIGN 5-->
+          
+          <div class="design5">
+          <div id="stem"></div>
+          </div>
+          
+<!--    ASSETS FOR DESIGN 4-->
+          
+          <div class="design4">
+          <div id="cube1">
+              <div id="back" class="smSquare">
+      </div>
+      <div id="front" class="smSquare">
+      </div>
+      <div id="left" class="smSquare">
+      </div>
+      <div id="right" class="smSquare">
+      </div>
+      <div id="top" class="smSquare">
+      </div>
+      <div id="bottom" class="smSquare">
+      </div>
+              </div>
+              <div id="scaleDown">
+              <div id="cube2">
+              <div id="back" class="smSquare">
+      </div>
+      <div id="front" class="smSquare">
+      </div>
+      <div id="left" class="smSquare">
+      </div>
+      <div id="right" class="smSquare">
+      </div>
+      <div id="top" class="smSquare">
+      </div>
+      <div id="bottom" class="smSquare">
+      </div>
+              </div>
+              </div>
+          </div>
+    
+    <!-- ASSETS FOR DESIGN 3 -->
+    
+    <div class="design3">
+      <div class="volcano">
+          <div class="smoke"></div>
+          <div class="smoke2"></div>
+        </div>
+    <div class="volcano2">
+        <div class="smoke"></div>
+          <div class="smoke2"></div>
+        </div>
+    <div class="volcano3">
+        <div class="smoke"></div>
+          <div class="smoke2"></div>
+        </div>
+    </div>
+    
+    <!-- ASSETS FOR DESIGN 2 -->
+    
+    <div class="spheres">
+    <div id="flt1"><div id="sphere1"></div></div>
+    <div id="flt2"><div id="sphere2"></div></div>
+      <div id="flt3"><div id="sphere3"></div></div>
+    <div id="flt4"><div id="sphere4"></div></div>
+    <div id="flt5"><div id="sphere5"></div></div>
+    <div id="flt6"><div id="sphere6"></div></div>
+    <div id="flt7"><div id="sphere7"></div></div>
+    </div>
+    
+    <!-- ASSETS FOR DESIGN 1 -->
+    
+    <div class="cloud"></div>
+    <div id="flowers">
+    <div id="flower" class="flower1"></div>
+    <div id="flower" class="flower2"></div>
+    <div id="flower" class="flower3"></div>
+    <div id="flower" class="flower4"></div>
+    <div id="flower" class="flower5"></div>
+    </div>
+      </div>
+    
+    <div id="groundWrapper">
+    <div id="ground" class="ground1"><div class="bhshadow">Ben H</div></div>
+      </div>
+  </div>
+  
+  <div id="aboutPage">
+      <div id="abtcontent">
+    <h1>ABOUT BEN HOLLAND</h1>
+      <h3>General</h3>
+    <p>That's me! I'm going by Ben H on this site because it makes the URL shorter, and maybe is more memorable, but my full name is Ben Holland. Hi!<br><br>I'm a sophomore computer science major at Kent State University.  I was raised in Medina Ohio, and the north-east Ohio community means a lot to me, especially the DIY music scene and the tech industry. </p>
+          <h3>Code</h3>
+          <p>
+          I've always loved making things, especially pretty/unique things and interactive things.  Check out my Projects page to see the bulk of the stuff I've done, or check out my resume if you want to see what I know/my formal experience.<br><br><b>If you're looking to hire a programmer/designer, reach out to me!!</b> I love this stuff and would love nothing more than to make my living doing it.
+          </p>
+      <h3>Music</h3>
+      <p>I have played the drums for 8+ years-- two of which were in my current band, <a href="www.thedrawingblanks.com">The Drawing Blanks.</a>  I also play guitar, bass, and sing.  Music theory is a big passion of mine- I only ever took one formal music theory class, but learned plenty from making <a href="www.soundcloud.com/benholland21">dumb 8-bit songs on Garageband</a>, and learning from my <a href="https://twitter.com/bandforeveryone">extremely talented friends.</a></p>
+          
+          <h3>DESIGN</h3>
+          <p>
+          I also love photoshop, CSS, Illustrator, and pixel art!  I'm going to put some of my design stuff up here soon. 
+          </p>
+          
+    <button onclick="main()">BACK</button>
+          
+      </div>
+      <img src="suit.gif" id="suit">
+  </div>
+    
+    <div id="projectsPage">
+        <div id="projectsContent">
+            
+            <div id="wall" class="wall1">
+                </div>
+            <div id="floor" class="floor1"></div>
+            <div id="wall" class="wall2">
+                </div>
+            <div id="floor" class="floor2"></div>
+            <div id="wall" class="wall3">
+                </div>
+            <div id="floor" class="floor3"></div>
+            <div id="wall" class="wall4">
+                </div>
+            <div id="floor" class="floor4"></div>
+            <div id="wall" class="wall5">
+                </div>
+            
+        <h1 id="projectsH1">PROJECTS</h1>
+                
+            
+            <p id="projBack" onclick="main()">BACK</p>
+            
+            <a id="projA" href="https://codepen.io/bhollan5/" target="_blank"><h3 id="projectsPen">CODEPEN PROJECTS</h3>
+            <p id="projectsPen" class="hexD">A lot of the things I work on start out as codepen projects, and it has some of my coolest stuff!</p>
+                <p>Click here to check out my codepen!</p>
+                
+            </a>
+            
+            <a id="projA" href="http://hexaguessimal.com" target="_blank"><h3 id="projectsHex">HEXAGUESSIMAL</h3>
+            <p id="projectsHex" class="hexD">Hexaguessimal is a game about guessing hex codes that was put together for learning purposes.  It took about three days to code.</p>
+                <img id="projIMG" src="pics/hexaguessimal.jpg">
+            </a>
+            <a id="projA" href="http://thedrawingblanks.com" target="_blank"><h3 id="projectsDB">THE DRAWING BLANKS</h3>
+                <p id="projectsDB">My band, The Drawing Blanks, have been playing original indie rock music for 2+ years.  Ben plays the drums, sings, and writes. </p>
+            <img id="projIMG" src="pics/theDB.jpg">
+            </a>
+            <a id="projA" href="http://www.berlinfunkha.us" target="_blank">
+            <h3 id="projectsFB">Funkhaus Berlin</h3>
+                <p id="projectsFB">Funkhaus Berlin is a weekly radio show cohosted by Ben Holland and two other great people. It's about national and local politics, and jokes.</p>
+                <img id="projIMG" src="pics/funkhaus.jpg">
+            </a>
+            
+            
+                       </div>
+    
+    </div>
+    
+    <a onclick="main()"><div id="x"></div></a>
+    <div id="resumePage">
+        <div id="resumeContent">
+            <h1>Resume</h1>  
+            <a href="BenHolland_ResumePDF.pdf" target="_blank">
+                <button>RESUME (PDF)</button></a>
+            <br><br>
+            <a href="BenHolland_Resume.docx"><button>RESUME (.DOCX)</button></a>
+            <br><br>
+            <button onclick="main()">BACK</button>
+        </div>
+    </div>
+    
+</body>
+    
+</html>
