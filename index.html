@@ -6,13 +6,28 @@
         <link rel="manifest" href="/favicons/site.webmanifest">
         <link rel="stylesheet" href="/style.css">
         <title>benh.website</title>
+        <script>
+            function highlight_nav() {
+                var pathname = window.location.pathname;
+                console.log(pathname);
+                var nav_links = document.getElementById("nav-links").children;
+                for (var i = 0; i < nav_links.length; i++) {
+                    console.log(nav_links[i].getAttribute("href"))
+                    if (nav_links[i].getAttribute("href") == pathname) {
+                        nav_links[i].classList.add("selected");
+                    } else {
+                        nav_links[i].classList.add("gray");
+                    }
+                }
+            }
+        </script>
     </head>
-    <body>
+    <body onload="highlight_nav()">
         <header>
             <h1>&#9639; &nbsp; Ben H. &nbsp; &#9640;</h1>
             <p id="page-subtitle">Hi! This is my personal website.</p>
         </header>
-        <nav>
+        <nav id="nav-links">
             <a class="nav-link blue" href="/">Bio</a>
             <a class="nav-link blue2" href="/portfolio">Portfolio</a>
             <a class="nav-link brown" href="/plans">Plans</a>
