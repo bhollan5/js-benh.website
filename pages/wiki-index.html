@@ -1,3 +1,30 @@
 <div class="text-center">
-    <script></script>
+    <script>
+        //  This script runs as soon as this page loads, loading in the wiki page data. 
+
+        var xhttp = new XMLHttpRequest();
+
+        // Response to 
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                var pages = JSON.parse(xhttp.responseText);
+                for (var i = 0; i < pages.length; i++) {
+                    var page = pages[i];
+                    document.getElementById("demo").innerHTML += page.page_title + "<br/>";
+                    document.getElementById("demo").innerHTML += page.page_content + "<br/>";
+                    document.getElementById("demo").innerHTML += `<a href="/wiki/${page.page_title}">View</a>&nbsp;`;
+                    document.getElementById("demo").innerHTML += `<a href="/wiki-editor/${page.page_title}">Edit</a> <br/><br/>`;
+                }
+                
+            }
+        };
+        xhttp.open("GET", "/api/get-wiki-pages", true);
+        xhttp.send();
+    </script>
+    <br/><br/>
+    <h3>Wiki Index</h3>
+    <p>An index of the wiki pages</p>
+    <br/><br/>
+    <div id="demo"></div>
 </div>

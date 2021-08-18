@@ -1,0 +1,141 @@
+<div class="text-center">
+    <script>
+        function populate_calendar() {
+            var d = new Date();
+
+            var month_num = d.getMonth();
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            var month = months[month_num];
+            document.getElementById('month').innerHTML = month;
+
+            var year = d.getFullYear();
+            document.getElementById('year').innerHTML = year;
+
+            var current_day = d.getDate();
+            d.setDate(1);
+            var starting_weekday = d.getDay();
+            //  Padding the beginning of the month
+            for (var i = 0; i < starting_weekday; i++) {
+                document.getElementById('days').innerHTML += "<li></li>";
+            }
+            //  Drawing the month's days.
+            var month_day_amt = month_days[month_num];
+            for (var i = 1; i <= month_day_amt; i++) {
+                if (i == current_day) {
+                    document.getElementById('days').innerHTML += `<li id="current-day">${i}</li>`;
+                } else {
+                    document.getElementById('days').innerHTML += `<li>${i}</li>`;
+                }
+            }
+            //  Padding the end of the month
+            d.setDate(month_day_amt);
+            var last_weekday = d.getDay();
+            for (var i = last_weekday; i < 8; i++) {
+                document.getElementById('days').innerHTML += "<li></li>";
+            }
+
+        }
+        window.addEventListener('load', function () {
+            populate_calendar();
+        });
+    </script>
+    <br/><br/>
+    <div class="container-center flex space-between">
+        <div style="width:48%">
+
+            <!--  Calendar  -->
+            <div id="calendar">
+                <ul id="month-and-year">
+                    <li class="prev">&#10094;</li>
+                    <li><span id="month">[Month]</span>, <span id="year">[Year]</span></li>
+                    <li class="next">&#10095;</li>
+                </ul>
+                <ul id="weekdays">
+                    <li>Mo</li>
+                    <li>Tu</li>
+                    <li>We</li>
+                    <li>Th</li>
+                    <li>Fr</li>
+                    <li>Sa</li>
+                    <li>Su</li>
+                </ul>
+                <ul id="days">
+                </ul>
+            </div>
+
+        </div>
+        <div style="width:48%">
+            <div id="time-tracker">
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /><br /><br /><br />
+    <div class="divider-line"></div>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+
+    <style>
+        /*  Calendar:   */
+        ul {
+            list-style-type: none;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+            padding-inline-start: 0px;
+        }
+        #calendar {
+            border: solid 1px #466EA8;
+            height: 250px;
+            width: 100%;
+            font-family: sans-serif;
+        }
+        #month-and-year {
+            width: calc(100% - 20px);
+            color: #4698A8;
+            border-bottom: solid 1px #466EA8;
+            font-size: 12px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-left: 0px;
+            padding: 0px 10px 0px 10px;
+        }
+        #weekdays {
+            width: 100%;
+            display: flex;
+            color: gray;
+            justify-content: space-around;
+            margin: 10px 0px;
+            font-size: 14px;
+        }
+        #days {
+            width: 100%;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-around;
+            flex-flow: row wrap;
+        }
+        #days li {
+            width: 13%;
+            text-align: center;
+            margin-top: 5px;
+        }
+        #current-day {
+            font-weight: bold;
+            color: #F87600;
+            text-decoration: underline;
+        }
+
+        /*  Time tracker:  */
+        #time-tracker {
+            border: solid 1px #466EA8;
+            height: 250px;
+        }
+
+    </style>
+
+</div>

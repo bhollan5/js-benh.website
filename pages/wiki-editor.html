@@ -1,8 +1,77 @@
 <div class="text-center wiki-page">
+    <script>
+        //  The wiki editor JS:
+        window.addEventListener('load', function () {
+
+            //  Page data...
+            var pathname = window.location.pathname;
+            var page_data = {
+                slug: pathname.split("/")[2],
+                title: "",
+                content: "",
+            }
+            page_buffer = {
+                slug: pathname.split("/")[2],
+                title: "",
+                content: ""
+            }
+            var modified = false;
+            
+            
+
+            //  Getting page data from the database. 
+            if (page_data.slug != undefined) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Typical action to be performed when the document is ready:
+                        var pages = JSON.parse(xhttp.responseText);
+                    }
+                };
+                xhttp.open("GET", "/api/get-wiki-page/" + page_data.slug, true);
+                xhttp.send();
+            }
+
+            //  Slug algorithm from https://stackoverflow.com/questions/1053902/how-to-convert-a-title-to-a-url-slug-in-jquery
+            document.getElementById("page-title").addEventListener('input', (event) => {
+                page_buffer.title = event.target.value;
+                page_buffer.slug = event.target.value.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+                document.getElementById("page-slug").innerHTML = page_buffer.slug;
+            });
+
+            //  Getting the body content as well. 
+            document.getElementById("page-content").addEventListener('input', (event) => {
+                page_buffer.content = event.target.value;
+            });
+
+        });
+
+        //  Publish those changes!
+        function publish() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Typical action to be performed when the document is ready:
+                    var pages = JSON.parse(xhttp.responseText);
+                }
+            };
+            xhttp.open("POST", "/api/update-wiki-page/", true);
+            xhttp.send(JSON.stringify(page_buffer));
+        }
+
+    </script>
 
     <br /><br /><br /><br />
 
-    <h2 style="font-size:2em;"><span style="font-weight: normal">Editing:</span> Page.Title</h2>
+    <h2 style="font-size:2em;" >
+        <span style="font-weight: normal">Editing:</span> 
+        <input type="text" id="page-title" style="font-size: 1em; border: none; font-family:'Times New Roman', Times, serif;" 
+               placeholder="Page title here"/>
+    </h2>
+    <div>
+        ID: <span type="text" id="page-slug"></span>
+        <br/><br/>
+    </div>
     <hr />
     
     <div id="text-editor">
@@ -16,20 +85,21 @@
             <div><h3>H2</h3></div>
             <div><h3>H3</h3></div>
         </div>
-        <textarea></textarea>
+        <textarea id="page-content"></textarea>
         <div id="summary-section">
             <label style="font-family: sans-serif;color: var(--blue); font-weight:bold;">Edit summary:</label>
             <br />
             <input style="width:100%;" />
             <br/>
-            <button>Publish changes</button>
+            <div style="display:flex;align-items: center;">
+                <button onclick="publish()">Publish changes</button>
+                <div id="modified">Unsaved changes</div>
+            </div>
+
         </div>
     </div>
 
-    
-
-
-
     <br /><br /><br /><br /><br /><br /><br /><br />
     <!--<h3>Current page: @Model.Title</h3>-->
+
 </div>

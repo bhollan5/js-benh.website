@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -12,7 +13,6 @@
                 console.log(pathname);
                 var nav_links = document.getElementById("nav-links").children;
                 for (var i = 0; i < nav_links.length; i++) {
-                    console.log(nav_links[i].getAttribute("href"))
                     if (nav_links[i].getAttribute("href") == pathname) {
                         nav_links[i].classList.add("selected");
                     } else {
@@ -31,7 +31,7 @@
             <a class="nav-link blue" href="/">Bio</a>
             <a class="nav-link blue2" href="/portfolio">Portfolio</a>
             <a class="nav-link brown" href="/plans">Plans</a>
-            <a class="nav-link orange" href="/wiki">Wiki</a>
+            <a class="nav-link orange" href="/dash">Dash</a>
         </nav>
 
         <div class="divider-line"></div>
