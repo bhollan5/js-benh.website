@@ -97,7 +97,15 @@
         <div style="width:48%">
             <div id="time-tracker">
                 <div id="time-tracker-title">
-                    Time tracker -- August 11
+                    Time tracker
+                </div>
+                <div class="day-label"></div>
+                <div>
+                    <div class="current-task">
+                        <input type="text" placeholder="Task description..."/>
+                        <div>5:00:00</div>
+                        <img src="/general/play_button.png">
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,6 +188,22 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
+        }
+        .current-task {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 50px;
+        }
+        .current-task input {
+            border: none;
+            border-bottom: solid 1px black;
+        }
+        .current-task div {
+            font-size: 12px;
+        }
+        .current-task img {
+            opacity: .5;
         }
 
     </style>
