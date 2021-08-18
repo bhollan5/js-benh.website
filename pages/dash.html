@@ -67,22 +67,27 @@
         }
         window.addEventListener('load', function () {
             populate_calendar();
+            display_entries();
         });
 
-        //  Timer
+        ////  Timer
         var entries = [];
         var timer_function = null;
-        var timer = {
-            task: "",
-            seconds: 0,
-            minutes: 0,
-            hours: 0
+        function new_timer() {
+            return {
+                task: "",
+                seconds: 0,
+                minutes: 0,
+                hours: 0
+            }
         }
+        var timer = new_timer();
         function start_timer() {
             document.getElementById('play-button').classList.add('hidden');
             document.getElementById('pause-button').classList.remove('hidden');
             timer_function = setInterval(timer_tick, 1000);
         }
+
         function timer_tick() {
             if (timer.seconds < 60) {
                 timer.seconds++;
@@ -94,23 +99,43 @@
                 timer.minutes = 0;
                 timer.hours++;
             }
-            display_timer();
+            document.getElementById('current-timer-display').innerHTML = time_to_string(timer);
         }
-        function display_timer() {
-            function two_place_num(num) {
+
+        //  Returns a nicely displayed string, from a timer object.
+        function time_to_string(timer) {
+            function two_place_num(num){
                 if (num < 10) {
                     return "0" + String(num);
                 }
                 return num;
             }
-            document.getElementById('tracked-seconds').innerHTML = two_place_num(timer.seconds);
-            document.getElementById('tracked-minutes').innerHTML = two_place_num(timer.minutes);
-            document.getElementById('tracked-hours').innerHTML = timer.hours;
+            return `${timer.hours}:${two_place_num(timer.minutes)}:${two_place_num(timer.seconds)}`;
         }
+        
+        //  Stop the timer from recording, add the current entry to the entry list. 
         function stop_timer() {
             document.getElementById('play-button').classList.remove('hidden');
             document.getElementById('pause-button').classList.add('hidden');
+            timer.task = document.getElementById('current-task').value;
             clearInterval(timer_function);
+            entries.push(timer);
+            timer = new_timer();
+            display_entries();
+        }
+
+        //  Clear & redraw the entries from the work timer. 
+        function display_entries() {
+            var entry_log = document.getElementById('entries');
+            entry_log.innerHTML = "";
+            for (var i = 0; i < entries.length; i++) {
+                var entry = entries[0];
+                var new_entry = '<div class="entry">';
+                new_entry += `<span>${entry.task}</span>`;
+                new_entry += `<span>${time_to_string(entry)}</span>`;
+                new_entry += `</div>`;
+                entry_log.innerHTML += new_entry;
+            }
         }
 
     </script>
@@ -140,24 +165,37 @@
 
         </div>
         <div style="width:48%">
-            <div id="time-tracker">
-                <div id="time-tracker-title">
-                    Time tracker
+            <div id="blog">
+                <div id="blog-title">Blog</div>
+                <div id="blog-link-container">
+                    <a href="/wiki">Wiki base</a>
                 </div>
-                <div class="day-label">Today -- August 18</div>
-                <div class="day-container">
-                    <div class="current-task">
-                        <input type="text" placeholder="Task description..."/>
-                        <div><span id="tracked-hours">0</span>:<span id="tracked-minutes">00</span>:<span id="tracked-seconds">00</span></div>
-                        <img src="/general/play_button.png" id="play-button" onclick="start_timer()">
-                        <img src="/general/pause_button.png" id="pause-button" class="hidden" onclick="stop_timer()">
-                    </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+
+    <div id="time-tracker">
+        <div id="time-tracker-title">
+            Time tracker
+        </div>
+        <div class="day-label">Today -- August 18</div>
+        <div class="day-container">
+            <div class="current-task">
+                <input type="text" placeholder="Task description..." id="current-task"/>
+                <div id="current-timer-display">0:00:00</div>
+                <img src="/general/play_button.png" id="play-button" onclick="start_timer()">
+                <img src="/general/pause_button.png" id="pause-button" class="hidden" onclick="stop_timer()">
+            </div>
+            <div id="entries">
+                <div class="entry">
+                    <span>Work on hexaguessimal</span><span>1:30pm-3:00pm</span> <span>2:30:00</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <br /><br /><br /><br />
+    <br /><br />
     <div class="divider-line"></div>
     <br /><br /><br /><br /><br /><br /><br /><br />
 
@@ -186,7 +224,7 @@
             color: #4698A8;
             border-bottom: solid 1px #466EA8;
             font-size: 12px;
-            height: 75px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -219,6 +257,30 @@
             text-decoration: underline;
         }
 
+        /*  Blog:    */
+        #blog {
+            border: solid 1px #466EA8;
+            height: 250px;
+            font-family: sans-serif;
+        }
+        #blog-title {
+            width: 100%;
+            color: #4698A8;
+            border-bottom: solid 1px #466EA8;
+            font-size: 12px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        #blog-link-container {
+            padding: 10px;
+        }
+        #blog-link-container a {
+            margin-bottom: 5px;
+            
+        }
+
         /*  Time tracker:  */
         #time-tracker {
             border: solid 1px #466EA8;
@@ -230,7 +292,7 @@
             color: #4698A8;
             border-bottom: solid 1px #466EA8;
             font-size: 12px;
-            height: 75px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -254,6 +316,7 @@
         .current-task input {
             border: none;
             border-bottom: solid 1px black;
+            outline: none;
         }
         .current-task div {
             font-size: 12px;
@@ -264,6 +327,14 @@
         }
         .hidden {
             display: none;
+        }
+        .entry {
+            display: flex;
+            font-size: 12px;
+            justify-content: space-around;
+            margin-left: 25px;
+            margin-right: 100px;
+            margin-bottom: 20px;
         }
 
     </style>
