@@ -68,6 +68,51 @@
         window.addEventListener('load', function () {
             populate_calendar();
         });
+
+        //  Timer
+        var entries = [];
+        var timer_function = null;
+        var timer = {
+            task: "",
+            seconds: 0,
+            minutes: 0,
+            hours: 0
+        }
+        function start_timer() {
+            document.getElementById('play-button').classList.add('hidden');
+            document.getElementById('pause-button').classList.remove('hidden');
+            timer_function = setInterval(timer_tick, 1000);
+        }
+        function timer_tick() {
+            if (timer.seconds < 60) {
+                timer.seconds++;
+            } else if (timer.minutes < 60) {
+                timer.seconds = 0;
+                timer.minutes++;
+            } else {
+                timer.seconds = 0;
+                timer.minutes = 0;
+                timer.hours++;
+            }
+            display_timer();
+        }
+        function display_timer() {
+            function two_place_num(num) {
+                if (num < 10) {
+                    return "0" + String(num);
+                }
+                return num;
+            }
+            document.getElementById('tracked-seconds').innerHTML = two_place_num(timer.seconds);
+            document.getElementById('tracked-minutes').innerHTML = two_place_num(timer.minutes);
+            document.getElementById('tracked-hours').innerHTML = timer.hours;
+        }
+        function stop_timer() {
+            document.getElementById('play-button').classList.remove('hidden');
+            document.getElementById('pause-button').classList.add('hidden');
+            clearInterval(timer_function);
+        }
+
     </script>
     <br/><br/>
     <div class="container-center flex space-between">
@@ -99,12 +144,13 @@
                 <div id="time-tracker-title">
                     Time tracker
                 </div>
-                <div class="day-label"></div>
-                <div>
+                <div class="day-label">Today -- August 18</div>
+                <div class="day-container">
                     <div class="current-task">
                         <input type="text" placeholder="Task description..."/>
-                        <div>5:00:00</div>
-                        <img src="/general/play_button.png">
+                        <div><span id="tracked-hours">0</span>:<span id="tracked-minutes">00</span>:<span id="tracked-seconds">00</span></div>
+                        <img src="/general/play_button.png" id="play-button" onclick="start_timer()">
+                        <img src="/general/pause_button.png" id="pause-button" class="hidden" onclick="stop_timer()">
                     </div>
                 </div>
             </div>
@@ -189,6 +235,16 @@
             align-items: center;
             justify-content: space-around;
         }
+        .day-label {
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            margin: 3px 0px;
+        }
+        .day-container {
+            border-top: solid 1px #466EA8;
+            border-bottom: solid 1px #466EA8;
+        }
         .current-task {
             display: flex;
             align-items: center;
@@ -203,7 +259,11 @@
             font-size: 12px;
         }
         .current-task img {
-            opacity: .5;
+            cursor: pointer;
+            /* opacity: .5; */
+        }
+        .hidden {
+            display: none;
         }
 
     </style>
