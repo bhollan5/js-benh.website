@@ -19,7 +19,9 @@ http.createServer(function (request, response) {
 
     //  SQL database API...
     if (route_name.split("/")[1] == "api") {
-        api_routes(route_name, request, response);
+        var route_path = route_name.split('/');
+        route_path.shift(); route_path.shift();
+        api_routes(route_path, request, response);
     }
 
     //  Getting pages.

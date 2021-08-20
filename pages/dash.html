@@ -1,144 +1,6 @@
 <div class="text-center">
-    <script>
-        //  Shifting the calendar forward or backward.
-        var d = new Date();
-        var month_shift = 0;
-        var year_shift = 0;
-
-        function shift_calendar(direction) {
-            d = new Date();
-            month_shift += direction;
-            if (d.getMonth() + month_shift >= 12) {
-                month_shift = 0 - d.getMonth();
-                year_shift++;
-            } else if (d.getMonth() + month_shift < 0) {
-                month_shift = 11 - d.getMonth();
-                year_shift--;
-            }
-            populate_calendar();
-        }
-
-        //  Drawing the calendar
-        function populate_calendar() {
-
-            d = new Date();
-            var month_num = d.getMonth() + month_shift;
-            var year = d.getFullYear() + year_shift;
-            d.setMonth(month_num);
-            d.setFullYear(year);
-            console.log(`Month: ${month_num}`);
-            console.log(`Year: ${year}`);
-
-            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            var month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            var month = months[month_num];
-            document.getElementById('month').innerHTML = month;
-
-            document.getElementById('year').innerHTML = year;
-
-            //  Drawing days
-            document.getElementById('days').innerHTML = "";
-            var current_day = d.getDate();
-            if (month_shift != 0 || year_shift != 0) {
-                current_day = -1;
-            }
-            d.setDate(1);
-            var starting_weekday = d.getDay();
-            console.log("Starting week day: " + starting_weekday);
-            //  Padding the beginning of the month
-            for (var i = 0; i < starting_weekday; i++) {
-                document.getElementById('days').innerHTML += "<li></li>";
-            }
-            //  Drawing the month's days.
-            var month_day_amt = month_days[month_num];
-            for (var i = 1; i <= month_day_amt; i++) {
-                if (i == current_day) {
-                    document.getElementById('days').innerHTML += `<li id="current-day">${i}</li>`;
-                } else {
-                    document.getElementById('days').innerHTML += `<li>${i}</li>`;
-                }
-            }
-            //  Padding the end of the month
-            d.setDate(month_day_amt);
-            var last_weekday = d.getDay();
-            for (var i = last_weekday; i < 8; i++) {
-                document.getElementById('days').innerHTML += "<li></li>";
-            }
-        }
-        window.addEventListener('load', function () {
-            populate_calendar();
-            display_entries();
-        });
-
-        ////  Timer
-        var entries = [];
-        var timer_function = null;
-        function new_timer() {
-            return {
-                task: "",
-                seconds: 0,
-                minutes: 0,
-                hours: 0
-            }
-        }
-        var timer = new_timer();
-        function start_timer() {
-            document.getElementById('play-button').classList.add('hidden');
-            document.getElementById('pause-button').classList.remove('hidden');
-            timer_function = setInterval(timer_tick, 1000);
-        }
-
-        function timer_tick() {
-            if (timer.seconds < 60) {
-                timer.seconds++;
-            } else if (timer.minutes < 60) {
-                timer.seconds = 0;
-                timer.minutes++;
-            } else {
-                timer.seconds = 0;
-                timer.minutes = 0;
-                timer.hours++;
-            }
-            document.getElementById('current-timer-display').innerHTML = time_to_string(timer);
-        }
-
-        //  Returns a nicely displayed string, from a timer object.
-        function time_to_string(timer) {
-            function two_place_num(num){
-                if (num < 10) {
-                    return "0" + String(num);
-                }
-                return num;
-            }
-            return `${timer.hours}:${two_place_num(timer.minutes)}:${two_place_num(timer.seconds)}`;
-        }
-        
-        //  Stop the timer from recording, add the current entry to the entry list. 
-        function stop_timer() {
-            document.getElementById('play-button').classList.remove('hidden');
-            document.getElementById('pause-button').classList.add('hidden');
-            timer.task = document.getElementById('current-task').value;
-            clearInterval(timer_function);
-            entries.push(timer);
-            timer = new_timer();
-            display_entries();
-        }
-
-        //  Clear & redraw the entries from the work timer. 
-        function display_entries() {
-            var entry_log = document.getElementById('entries');
-            entry_log.innerHTML = "";
-            for (var i = 0; i < entries.length; i++) {
-                var entry = entries[0];
-                var new_entry = '<div class="entry">';
-                new_entry += `<span>${entry.task}</span>`;
-                new_entry += `<span>${time_to_string(entry)}</span>`;
-                new_entry += `</div>`;
-                entry_log.innerHTML += new_entry;
-            }
-        }
-
-    </script>
+    <script src="/scripts/calendar.js"></script>
+    <script src="/scripts/time_tracker.js"></script>
     <br/><br/>
     <div class="container-center flex space-between">
         <div style="width:48%">
@@ -179,7 +41,7 @@
         <div id="time-tracker-title">
             Time tracker
         </div>
-        <div class="day-label">Today -- August 18</div>
+        <div class="day-label">Today -- August 20</div>
         <div class="day-container">
             <div class="current-task">
                 <input type="text" placeholder="Task description..." id="current-task"/>
@@ -262,6 +124,7 @@
             border: solid 1px #466EA8;
             height: 250px;
             font-family: sans-serif;
+            font-size: 14px;
         }
         #blog-title {
             width: 100%;

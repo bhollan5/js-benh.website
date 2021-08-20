@@ -29,75 +29,114 @@ function connect_to_db() {
 connect_to_db();
 
 
-//  
-module.exports = function api_routes(route_name, request, response) {
+//  Returns a nicely displayed string, from a timer object.
+function time_to_string(time_obj) {
+    console.log("Converting this into a string:");
+    console.log(time_obj);
+    function two_place_num(num){
+        if (num < 10) {
+            return "0" + String(num);
+        }
+        return num;
+    }
+    return `${time_obj.h}:${two_place_num(time_obj.m)}:${two_place_num(time_obj.s)}`;
+}
 
-    var api_route = route_name.split("/")[2];
-    var api_param = route_name.split("/")[3];
+
+//  
+module.exports = function api_routes(route_path, request, response) {
+
+    var api_route = route_path[0];
+    var api_param = route_path[1];
 
     console.log(`Calling an API route: /api/${api_route}/${api_param}`);
 
-    if (api_route == "get-wiki-pages") {
-        con.query("SELECT * from wiki_pages;", function (err, result) {
-            if (err) throw err;
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end(JSON.stringify(result), 'utf-8');
-        });
-    }
-
-    else if (api_route == "get-wiki-page") {
-        var page_slug = request;
-        con.query(`SELECT * FROM wiki_pages WHERE slug_name=${page_slug};`, function (err, result) {
-            if (err) throw err;
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end(JSON.stringify(result), 'utf-8');
-        });
-    }
-
-    else if (api_route == "update-wiki-page") {
-        console.log("Update wiki page called");
-        var body = "";
-        //  Getting POST data from HTTP call. 
-        request.on("data", function (chunk) {
-            body += chunk;
-        });
-        request.on("end", function (chunk) {
-            console.log(body);
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end('dope', 'utf-8');
-        });
+    if (api_route == "wiki-pages") {
         
-        return;
-        con.query(`INSERT INTO wiki_pages (page_title, page_content) 
-                    VALUES (.title, .content) ;`, function (err, result) {
-            if (err) throw err;
-            console.log("1 record inserted");
+        if (request.method == 'GET' && api_param == undefined) {
             response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end(JSON.stringify(result), 'utf-8');
-        });
-        response.writeHead(200, { 'Content-Type': 'text/html' });
-        response.end('dope', 'utf-8');
+            response.end('Called GET /wiki-pages', 'utf-8');
+            // con.query("SELECT * from wiki_pages;", function (err, result) {
+            //     if (err) throw err;
+            //     response.writeHead(200, { 'Content-Type': 'text/html' });
+            //     response.end(JSON.stringify(result), 'utf-8');
+            // });
+        } else if (request.method == 'GET') {
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(`Called GET /wiki-pages/${api_param}`, 'utf-8');
+            // var page_slug = request;
+            // con.query(`SELECT * FROM wiki_pages WHERE slug_name=${page_slug};`, function (err, result) {
+            //     if (err) throw err;
+            //     response.writeHead(200, { 'Content-Type': 'text/html' });
+            //     response.end(JSON.stringify(result), 'utf-8');
+            // });
+        } else if (request.method == 'POST') {
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(`Called POST /wiki-pages`, 'utf-8');
+            // var body = "";
+            // //  Getting POST data from HTTP call. 
+            // request.on("data", function (chunk) {
+            //     body += chunk;
+            // });
+            // request.on("end", function (chunk) {
+            //     console.log(body);
+            //     response.writeHead(200, { 'Content-Type': 'text/html' });
+            //     response.end('dope', 'utf-8');
+            // });
+            // con.query(`INSERT INTO wiki_pages (page_title, page_content) 
+            //             VALUES (.title, .content) ;`, function (err, result) {
+            //     if (err) throw err;
+            //     console.log("1 record inserted");
+            //     response.writeHead(200, { 'Content-Type': 'text/html' });
+            //     response.end(JSON.stringify(result), 'utf-8');
+            // });
+        } else if (request.method == 'PUT') {
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(`Called PUT /wiki-pages/:id`, 'utf-8');
+            // var sql = "INSERT INTO wiki_pages (page_title, page_content) ";
+            // sql += "VALUES ('" + page_config.title + "', '" + page_config.content + "')";
+            // con.query(sql, function (err, result) {
+            //     if (err) throw err;
+            //     console.log("1 record inserted");
+            // });
+        }
+
+
+    } else if (api_route == "time-entries") {
+
+        if (request.method == 'GET' && api_param == undefined) {
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(`Called GET /time-entries`, 'utf-8');
+
+        } else if (request.method == 'GET') {
+            con.query(`SELECT * FROM time_entries WHERE date="${api_param}" ;`, function (err, result) {
+                if (err) throw err;
+                console.log("Fetched time entries.");
+                response.writeHead(200, { 'Content-Type': 'text/html' });
+                response.end(JSON.stringify(result), 'utf-8');
+            });
+
+        } else if (request.method == 'POST') {
+            var entry = "";
+            request.on('data', chunk => {
+                entry += chunk;
+            })
+            request.on('end', () => {
+                console.log(JSON.parse(entry)); 
+                entry = JSON.parse(entry);
+                con.query(`INSERT INTO time_entries (date, description, start_time, duration) 
+                            VALUES ("${entry.date.split('T')[0]}", "${entry.description}", 
+                                "${time_to_string(entry.start_time)}", "${time_to_string(entry.duration)}") ;`, function (err, result) {
+                    if (err) throw err;
+                    console.log("1 record inserted");
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
+                    response.end(JSON.stringify(result), 'utf-8');
+                });
+                response.writeHead(200, { 'Content-Type': 'text/html' });
+                response.end(`Called POST /time-entries`, 'utf-8');
+            })
+            
+        }
     }
-}
 
-//  Adding a page 
-function add_wiki_page(page_config) {
-    var sql = "INSERT INTO wiki_pages (page_title, page_content) ";
-    sql += "VALUES ('" + page_config.title + "', '" + page_config.content + "')";
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("1 record inserted");
-    });
-}
-
-function update_wiki_page(page_config) {
-
-}
-
-function get_wiki_page(page_id) {
-
-}
-
-function delete_wiki_page(page_id) {
-
-}
+} //  End of exported function api_routes(route_path, request, response)
