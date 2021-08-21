@@ -1,12 +1,12 @@
 ////  Timer
 var entries = [];
-var timer_function = null;  //  Stores a function called with onInterval
-var timer = new_timer();
+var timer_function = null;        //  Stores a function called with onInterval
+var timer = new_timer();          //  Stores the current timer. 
 
 //  Create a new timer object.
 function new_timer() {
     return {
-        date: new Date,
+        date: new Date(),
         task: "",
         start_time: {
             s: 0,
@@ -136,4 +136,17 @@ function load_entries() {
     httpRequest.open('GET', '/api/time-entries/' + date, true);
     httpRequest.send();
 }
-load_entries();
+
+
+//  Display the correct date at the top of the log. 
+function load_date_display() {
+    d = new Date();
+    var month_num = d.getMonth()
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    document.getElementById('today-date').innerHTML = `Today -- ${months[month_num]} ${d.getDate()}`;
+}
+
+window.addEventListener('load', function () {
+    load_date_display();
+    load_entries();
+})
