@@ -2,6 +2,7 @@
     <script src="/scripts/calendar.js"></script>
     <script src="/scripts/time_tracker.js"></script>
     <br/><br/>
+
     <div class="container-center flex space-between">
         <div style="width:48%">
 
@@ -27,32 +28,41 @@
 
         </div>
         <div style="width:48%">
+
+            <!--  Blog  -->
             <div id="blog">
                 <div id="blog-title">Blog</div>
                 <div id="blog-link-container">
                     <a href="/wiki">Wiki base</a>
                 </div>
             </div>
+
         </div>
     </div>
     <br /><br />
 
+    <!--  Time tracker  -->
     <div id="time-tracker">
         <div id="time-tracker-title">
             Time tracker
         </div>
         <div class="day-label">Today -- August 20</div>
         <div class="day-container">
-            <div class="current-task">
-                <input type="text" placeholder="Task description..." id="current-task"/>
-                <div id="current-timer-display">0:00:00</div>
-                <img src="/general/play_button.png" id="play-button" onclick="start_timer()">
-                <img src="/general/pause_button.png" id="pause-button" class="hidden" onclick="stop_timer()">
+            <div class="entry labels">
+                <span class="description">description of time use</span>
+                <span class="time-area">time spent</span>
+                <span class="button-area"></span>
+            </div>
+            <div class="current-entry">
+                <input type="text" placeholder="What are you working on?" id="current-task" class="description"/>
+                <div class="time-area" id="current-timer-display">0:00:00</div>
+                <img src="/general/play_button.png" id="play-button" class="button-area" onclick="start_timer()">
+                <img src="/general/pause_button.png" id="pause-button" class="button-area hidden" onclick="stop_timer()">
             </div>
             <div id="entries">
-                <div class="entry">
-                    <span>Work on hexaguessimal</span><span>1:30pm-3:00pm</span> <span>2:30:00</span>
-                </div>
+                <span class="description"></span>
+                <span class="time"></span>          <!--  These will all be replaced via JS  -->
+                <span class="button-area"></span>
             </div>
         </div>
     </div>
@@ -70,7 +80,7 @@
             padding-inline-start: 0px;
         }
         #calendar {
-            border: solid 1px #466EA8;
+            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
             height: 250px;
             width: 100%;
             font-family: sans-serif;
@@ -83,9 +93,10 @@
         }
         #month-and-year {
             width: calc(100% - 20px);
+            background: #fafafa;
             color: #4698A8;
             border-bottom: solid 1px #466EA8;
-            font-size: 12px;
+            font-size: 14px;
             height: 50px;
             display: flex;
             align-items: center;
@@ -121,16 +132,17 @@
 
         /*  Blog:    */
         #blog {
-            border: solid 1px #466EA8;
+            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
             height: 250px;
             font-family: sans-serif;
             font-size: 14px;
         }
         #blog-title {
             width: 100%;
+            background: #fafafa;
             color: #4698A8;
             border-bottom: solid 1px #466EA8;
-            font-size: 12px;
+            font-size: 14px;
             height: 50px;
             display: flex;
             align-items: center;
@@ -146,15 +158,16 @@
 
         /*  Time tracker:  */
         #time-tracker {
-            border: solid 1px #466EA8;
+            /*  border: solid 1px #466EA8; */
             height: 250px;
             font-family: sans-serif;
+            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
         }
         #time-tracker-title {
             width: 100%;
-            color: #4698A8;
+            background: #fafafa;
             border-bottom: solid 1px #466EA8;
-            font-size: 12px;
+            font-size: 14px;
             height: 50px;
             display: flex;
             align-items: center;
@@ -170,23 +183,32 @@
             border-top: solid 1px #466EA8;
             border-bottom: solid 1px #466EA8;
         }
-        .current-task {
+        .current-entry {
             display: flex;
             align-items: center;
             justify-content: space-around;
             height: 50px;
         }
-        .current-task input {
+        .description {
             border: none;
-            border-bottom: solid 1px black;
-            outline: none;
+            display: block;
+            width: 175px;
         }
-        .current-task div {
+        input.description {
+            border-bottom: solid 1px gray;
+            outline: none;
+            transition-duration: .2s;
+        }
+        input.description:focus {
+            border-bottom: solid 1px rgb(41, 41, 41);
+        }
+        .time-area {
             font-size: 12px;
         }
-        .current-task img {
+        .button-area {
             cursor: pointer;
             /* opacity: .5; */
+            width: 30px;
         }
         .hidden {
             display: none;
@@ -195,9 +217,14 @@
             display: flex;
             font-size: 12px;
             justify-content: space-around;
-            margin-left: 25px;
-            margin-right: 100px;
-            margin-bottom: 20px;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        .labels, .labels span {
+            font-size: 10px;
+            color: gray;
+            background: #fafafa;
         }
 
     </style>

@@ -88,9 +88,9 @@ function display_entries() {
     for (var i = 0; i < entries.length; i++) {
         var entry = entries[i];
         var new_entry = '<div class="entry">';
-        new_entry += `<span>${entry.description}</span>`;
-        new_entry += `<span>${time_to_string(entry)}</span>`;
-        new_entry += `</div>`;
+        new_entry += `<span class="description">${entry.description}</span>`;
+        new_entry += `<span class="time-area">${time_to_string(entry)}</span>`;
+        new_entry += `<span class="button-area"></span></div>`;
         entry_log.innerHTML += new_entry;
     }
 }
@@ -115,10 +115,12 @@ function parse_entries(entries_string) {
         entry.duration = time_string_to_obj(entry.duration);
     } 
     entries = entries_array;
+    display_entries();
 }
 
 //  Load entries for today's date. 
 function load_entries() {
+    console.log("Calling load_entries()");
     var date = new Date();
     date = date.toISOString();
     date = date.split('T')[0]; // Format the date like: 2021-08-20
