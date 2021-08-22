@@ -7,8 +7,8 @@
         <div style="width:48%">
 
             <!--  Calendar  -->
-            <div id="calendar">
-                <ul id="month-and-year">
+            <div id="calendar" class="dash-widget">
+                <ul id="month-and-year" class="dash-widget-header">
                     <li class="prev" onclick="shift_calendar(-1)">&#10094;</li>
                     <li><span id="month">[Month]</span>, <span id="year">[Year]</span></li>
                     <li class="next" onclick="shift_calendar(1)">&#10095;</li>
@@ -30,8 +30,8 @@
         <div style="width:48%">
 
             <!--  Blog  -->
-            <div id="blog">
-                <div id="blog-title">Blog</div>
+            <div id="blog" class="dash-widget">
+                <div id="blog-title" class="dash-widget-header">Blog</div>
                 <div id="blog-link-container">
                     <a href="/wiki">Wiki base</a>
                     <br/>
@@ -46,8 +46,8 @@
     <br /><br />
 
     <!--  Time tracker  -->
-    <div id="time-tracker">
-        <div id="time-tracker-title">
+    <div id="time-tracker" class="dash-widget">
+        <div id="time-tracker-title" class="dash-widget-header">
             Time tracker
         </div>
         <div class="day-label" id="today-date">Today -- August 20</div>
@@ -76,6 +76,23 @@
     <br /><br /><br /><br /><br /><br /><br /><br />
 
     <style>
+        /*  General dashboard widget features */
+        .dash-widget {
+            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
+        }
+        .dash-widget-header {
+            background: #fafafa;
+            color: #4698A8;
+            border-bottom: solid 1px #466EA8;
+        }
+        .dark-mode .dash-widget-header {
+            background:rgb(30, 30, 30);
+        }
+        .dark-mode .dash-widget {
+            box-shadow: 0px 2px 10px rgba(0,0,0,1);
+            background: rgb(41, 41, 41);
+        }
+
         /*  Calendar:   */
         ul {
             list-style-type: none;
@@ -84,7 +101,6 @@
             padding-inline-start: 0px;
         }
         #calendar {
-            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
             height: 250px;
             width: 100%;
             font-family: sans-serif;
@@ -97,9 +113,6 @@
         }
         #month-and-year {
             width: calc(100% - 20px);
-            background: #fafafa;
-            color: #4698A8;
-            border-bottom: solid 1px #466EA8;
             font-size: 14px;
             height: 50px;
             display: flex;
@@ -136,16 +149,12 @@
 
         /*  Blog:    */
         #blog {
-            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
             height: 250px;
             font-family: sans-serif;
             font-size: 14px;
         }
         #blog-title {
             width: 100%;
-            background: #fafafa;
-            color: #4698A8;
-            border-bottom: solid 1px #466EA8;
             font-size: 14px;
             height: 50px;
             display: flex;
@@ -169,9 +178,6 @@
         }
         #time-tracker-title {
             width: 100%;
-            background: #fafafa;
-            color: #4698A8;
-            border-bottom: solid 1px #466EA8;
             font-size: 14px;
             height: 50px;
             display: flex;
@@ -203,6 +209,7 @@
             border-bottom: solid 1px gray;
             outline: none;
             transition-duration: .2s;
+            background: none;
         }
         input.description:focus {
             border-bottom: solid 1px rgb(41, 41, 41);
@@ -224,6 +231,9 @@
             justify-content: space-around;
             padding: 10px;
             background: #fafafa;
+        }
+        .darkmode .entry, .dark-mode .labels, .dark-mode .labels span {
+            background:rgb(30, 30, 30);
         }
 
         .labels, .labels span {
