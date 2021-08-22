@@ -23,6 +23,9 @@ function new_timer() {
 
 //  Start a new timer.
 function start_timer() {
+    if (localStorage.getItem('loggedIn') != 'true') {
+        return;
+    }
     var d = new Date();
     timer.start_time.s = d.getSeconds();
     timer.start_time.m = d.getMinutes();
@@ -149,4 +152,22 @@ function load_date_display() {
 window.addEventListener('load', function () {
     load_date_display();
     load_entries();
+    add_play_button_listener();
 })
+
+
+//  Scripts to disable the play button unless the user is logged in. 
+function add_play_button_listener() {
+    document.getElementById('play-button').addEventListener('mouseover', () => {
+        if (localStorage.getItem('loggedIn') != 'true') {
+            document.getElementById('tooltip').style.display = "block";
+            document.getElementById('tooltip').innerHTML = 'Must be logged in to use the timer!';
+        }
+    })
+    document.getElementById('play-button').addEventListener('mouseout', () => {
+        document.getElementById('tooltip').style.display = "none";
+    })
+
+    //  We'll also disable it, if we're logged out. 
+    document.getElementById('play-button').classList.add('disabled');
+}

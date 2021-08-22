@@ -1,0 +1,65 @@
+<div class="text-center">
+    <script src="/scripts/login.js"></script>
+    <br/><br/>
+
+    <div class="container-center flex space-between">
+        <div style="width:48%">
+
+            <!--  Calendar  -->
+            <div id="login">
+                <div id="login-header">
+                    <p>Admin log in </p>
+                </div>
+                <div style="padding: 10px; font-size:14px;">
+                    <label>username:</label>
+                    <br/>
+                    <input type="text" id="username-field" placeholder="username" />
+                    <br/><br/>
+                    <label>password:</label>
+                    <br/>
+                    <input type="password" id="password-field" placeholder="password" />
+                    <br/><br/>
+                    <button onclick="submit_login()">Log in</button>
+                </div>
+            </div>
+
+        </div>
+        <div style="width:48%">
+
+        </div>
+    </div>
+    
+    <div class="divider-line"></div>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+
+    <style>
+        #login {
+            box-shadow: 0px 2px 10px rgba(0,0,0,.5);
+            height: 250px;
+            width: 100%;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        #login-header {
+            background: #fafafa;
+            color: #4698A8;
+            border-bottom: solid 1px #466EA8;
+            padding: 20px;
+            text-align: center;
+        }
+        .dark-mode #login-header {
+            background:rgb(30, 30, 30);
+        }
+        .dark-mode #login {
+            box-shadow: 0px 2px 10px rgba(0,0,0,1);
+            background: rgb(41, 41, 41);
+        }
+        #login input {
+            background: none;
+        }
+        .dark-mode #login input {
+            color: white;
+        }
+    </style>
+
+</div>

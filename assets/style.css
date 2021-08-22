@@ -7,6 +7,8 @@
     --brown: #A88846;
     --orange: #F87600;
     --gray: #999999;
+    --black: #0D0D0D;
+    --light-black: #1E1E1E;
 }
 .blue {
     color: var(--blue);
@@ -29,10 +31,21 @@
 /**  Header stuff.     **/
 /************************/
 
+body {
+    position: relative;
+}
+
 header {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#log-out {
+    position: absolute;
+    top: 20px;
+    right: 100px;
+    display: none;
 }
 
 #dark-mode-icon {
@@ -114,6 +127,22 @@ nav {
 .dark-mode .ellipsis {
     filter: invert();
 }
+
+/*  The tooltip  */
+
+#tooltip {
+    position: absolute;
+    display: none;
+    width: 100px;
+    height: 40px;
+    font-size: 12px;
+    border-radius: 5px;
+    background: black;
+    color: white;
+    z-index: 100;
+    padding: 5px 10px;
+}
+
 
 
 
@@ -244,6 +273,9 @@ h4 {
     padding: 7px;
     border: solid 2px #808080;
 }
+.dark-mode .option-bar {
+    background: var(--light-black);
+}
 .option-bar div {
     width: 30px;
     text-align: center;
@@ -263,6 +295,9 @@ h4 {
     outline: none;
     box-shadow: inset 0px 0px 5px rgba(0,0,0,.5);
 }
+.dark-mode .wiki-page textarea {
+    background: var(--black);
+}
 #modified {
     font-family: sans-serif; 
     font-style: italic;
@@ -274,6 +309,13 @@ h4 {
     width: calc(100% - 40px);
     background: #EAECF0;
     padding: 20px;
+}
+.dark-mode #summary-section {
+    background: var(--light-black);
+}
+.dark-mode #summary-section input {
+    background: var(--black);
+    color: white;
 }
 #summary-section button {
     margin-top: 10px;
