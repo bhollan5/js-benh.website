@@ -35,6 +35,23 @@ header {
   align-items: center;
 }
 
+#dark-mode-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+.dark-mode #dark-mode-icon {
+    filter: invert();
+}
+.dark-mode {
+    background: #0D0D0D;
+    color: white;
+}
+.dark-mode a:not(.nav-link) {
+    color: var(--blue2);
+}
+
 /*  The page logo.      */
 #page-logo {
   color: black;
@@ -89,10 +106,13 @@ nav {
     margin-bottom: 40px;
     width: 100px;
     height: 50px;
-    background-image: url(/assets/general/ellipsis.svg);
+    background-image: url(/general/ellipsis.svg);
     background-repeat: no-repeat;
     margin-left: auto;
     margin-right: auto;
+}
+.dark-mode .ellipsis {
+    filter: invert();
 }
 
 
@@ -128,6 +148,9 @@ h4 {
 .icon {
     width: 18px;
     margin-right: 10px;
+}
+.dark-mode .icon {
+    filter: invert();
 }
 
 .centered {
@@ -177,6 +200,9 @@ h4 {
     bottom: 0px;
     padding: 10px;
     font-size: 14px;
+}
+.dark-mode .portfolio-item-text {
+    background: rgba(0,0,0,0.85);
 }
 .portfolio-item-text p {
     margin-bottom: 5px;

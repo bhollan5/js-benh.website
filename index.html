@@ -8,6 +8,16 @@
         <link rel="stylesheet" href="/style.css">
         <title>benh.website</title>
         <script>
+            var dark_mode = localStorage.getItem('darkMode');
+            if (dark_mode == 'false') {
+                dark_mode = false;
+            } else {
+                dark_mode = true;
+            }
+            console.log(`Dark mode: ${dark_mode}`)
+            console.log(`From the source: ${localStorage.getItem('darkMode')}`)
+
+            //  Highlight the currently selected tab. 
             function highlight_nav() {
                 var pathname = window.location.pathname;
                 console.log(pathname);
@@ -19,10 +29,30 @@
                         nav_links[i].classList.add("gray");
                     }
                 }
+                set_dark_mode();
             }
+
+            //  Toggle between dark mode.
+            function toggle_dark_mode() {
+                dark_mode = !dark_mode;
+                console.log(`Setting darkMode to: ${dark_mode}`);
+                localStorage.setItem('darkMode', String(dark_mode));
+                console.log(localStorage.getItem('darkMode'));
+                set_dark_mode();
+            }
+            
+            function set_dark_mode() {
+                var body = document.getElementsByTagName("BODY")[0];
+                if (dark_mode == true) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            }   
         </script>
     </head>
     <body onload="highlight_nav()">
+        <img src="/general/moon.png" id="dark-mode-icon" onclick="toggle_dark_mode()" />
         <header>
             <h1>&#9639; &nbsp; Ben H. &nbsp; &#9640;</h1>
             <p id="page-subtitle">Hi! This is my personal website.</p>

@@ -127,9 +127,9 @@ function load_entries() {
     httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function(response){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-            console.log("Recieved entries!");
-            console.log(`Status: ${httpRequest.status}`);
-            console.log(`Response: ${httpRequest.responseText}`);
+            // console.log("Recieved entries!");
+            // console.log(`Status: ${httpRequest.status}`);
+            // console.log(`Response: ${httpRequest.responseText}`);
             parse_entries(httpRequest.responseText);
         }
     };

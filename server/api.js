@@ -54,13 +54,12 @@ module.exports = function api_routes(route_path, request, response) {
     if (api_route == "wiki-pages") {
         
         if (request.method == 'GET' && api_param == undefined) {
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end('Called GET /wiki-pages', 'utf-8');
-            // con.query("SELECT * from wiki_pages;", function (err, result) {
-            //     if (err) throw err;
-            //     response.writeHead(200, { 'Content-Type': 'text/html' });
-            //     response.end(JSON.stringify(result), 'utf-8');
-            // });
+            con.query("SELECT * from wiki_pages;", function (err, result) {
+                if (err) throw err;
+                response.writeHead(200, { 'Content-Type': 'text/html' });
+                response.end(JSON.stringify(result), 'utf-8');
+            });
+
         } else if (request.method == 'GET') {
             response.writeHead(200, { 'Content-Type': 'text/html' });
             response.end(`Called GET /wiki-pages/${api_param}`, 'utf-8');
